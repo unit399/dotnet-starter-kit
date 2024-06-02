@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <RootNamespace>ROC.WebApi.Migrations.PostgreSQL</RootNamespace>
+        <AssemblyName>ROC.WebApi.Migrations.PostgreSQL</AssemblyName>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\Services\Catalog\Catalog.Infrastructure\Catalog.Infrastructure.csproj"/>
+        <ProjectReference Include="..\..\Services\Todo\Todo\Todo.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+</Project>
