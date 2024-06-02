@@ -4,13 +4,10 @@ using System.Net;
 
 namespace ROC.WebApi.Core.Exceptions;
 
-public class BaseException: Exception
+public class BaseException : Exception
 {
-    public IEnumerable<string> ErrorMessages { get; }
-
-    public HttpStatusCode StatusCode { get; }
-
-    public BaseException(string message, IEnumerable<string> errors, HttpStatusCode statusCode = HttpStatusCode.InternalServerError)
+    public BaseException(string message, IEnumerable<string> errors,
+        HttpStatusCode statusCode = HttpStatusCode.InternalServerError)
         : base(message)
     {
         ErrorMessages = errors;
@@ -21,4 +18,8 @@ public class BaseException: Exception
     {
         ErrorMessages = new List<string>();
     }
+
+    public IEnumerable<string> ErrorMessages { get; }
+
+    public HttpStatusCode StatusCode { get; }
 }

@@ -3,9 +3,9 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using ROC.WebApi.Core.Cache;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
+using ROC.WebApi.Core.Cache;
 
 namespace ROC.Core.Infrastructure.Cache;
 
@@ -19,41 +19,18 @@ public class DistributedCacheService : ICacheService
         (_cache, _logger) = (cache, logger);
     }
 
-    public T? Get<T>(string key) =>
-        Get(key) is { } data
+    public T? Get<T>(string key)
+    {
+        return Get(key) is { } data
             ? Deserialize<T>(data)
             : default;
-
-    private byte[]? Get(string key)
-    {
-        ArgumentNullException.ThrowIfNull(key);
-
-        try
-        {
-            return _cache.Get(key);
-        }
-        catch
-        {
-            return null;
-        }
     }
 
-    public async Task<T> GetAsync<T>(string key, CancellationToken token = default) =>
-        (await GetAsync(key, token) is { } data
+    public async Task<T> GetAsync<T>(string key, CancellationToken token = default)
+    {
+        return (await GetAsync(key, token) is { } data
             ? Deserialize<T>(data)
             : default) ?? throw new InvalidOperationException();
-
-    private async Task<byte[]?> GetAsync(string key, CancellationToken token = default)
-    {
-        try
-        {
-            return await _cache.GetAsync(key, token);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex);
-            return null;
-        }
     }
 
     public void Refresh(string key)
@@ -105,8 +82,43 @@ public class DistributedCacheService : ICacheService
         }
     }
 
-    public void Set<T>(string key, T value, TimeSpan? slidingExpiration = null) =>
+    public void Set<T>(string key, T value, TimeSpan? slidingExpiration = null)
+    {
         Set(key, Serialize(value), slidingExpiration);
+    }
+
+    public Task SetAsync<T>(string key, T value, TimeSpan? slidingExpiration = null,
+        CancellationToken cancellationToken = default)
+    {
+        return SetAsync(key, Serialize(value), slidingExpiration, cancellationToken);
+    }
+
+    private byte[]? Get(string key)
+    {
+        ArgumentNullException.ThrowIfNull(key);
+
+        try
+        {
+            return _cache.Get(key);
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private async Task<byte[]?> GetAsync(string key, CancellationToken token = default)
+    {
+        try
+        {
+            return await _cache.GetAsync(key, token);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            return null;
+        }
+    }
 
     private void Set(string key, byte[] value, TimeSpan? slidingExpiration = null)
     {
@@ -121,10 +133,8 @@ public class DistributedCacheService : ICacheService
         }
     }
 
-    public Task SetAsync<T>(string key, T value, TimeSpan? slidingExpiration = null, CancellationToken cancellationToken = default) =>
-        SetAsync(key, Serialize(value), slidingExpiration, cancellationToken);
-
-    private async Task SetAsync(string key, byte[] value, TimeSpan? slidingExpiration = null, CancellationToken token = default)
+    private async Task SetAsync(string key, byte[] value, TimeSpan? slidingExpiration = null,
+        CancellationToken token = default)
     {
         try
         {
@@ -151,13 +161,9 @@ public class DistributedCacheService : ICacheService
     {
         var options = new DistributedCacheEntryOptions();
         if (slidingExpiration.HasValue)
-        {
             options.SetSlidingExpiration(slidingExpiration.Value);
-        }
         else
-        {
             options.SetSlidingExpiration(TimeSpan.FromMinutes(5));
-        }
         options.SetAbsoluteExpiration(TimeSpan.FromMinutes(15));
         return options;
     }

@@ -9,6 +9,7 @@ public class ForbiddenException : BaseException
         : base("unauthorized", new Collection<string>(), HttpStatusCode.Forbidden)
     {
     }
+
     public ForbiddenException(string message)
         : base(message, new Collection<string>(), HttpStatusCode.Forbidden)
     {
