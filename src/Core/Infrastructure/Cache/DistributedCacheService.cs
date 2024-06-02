@@ -39,9 +39,9 @@ public class DistributedCacheService : ICacheService
     }
 
     public async Task<T> GetAsync<T>(string key, CancellationToken token = default) =>
-        await GetAsync(key, token) is { } data
+        (await GetAsync(key, token) is { } data
             ? Deserialize<T>(data)
-            : default;
+            : default) ?? throw new InvalidOperationException();
 
     private async Task<byte[]?> GetAsync(string key, CancellationToken token = default)
     {

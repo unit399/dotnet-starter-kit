@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <RootNamespace>ROC.WebApi.Core</RootNamespace>
         <AssemblyName>ROC.WebApi.Core</AssemblyName>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Update="Roslynator.Analyzers" Version="4.2.0">
