@@ -9,8 +9,9 @@ namespace ROC.WebApi.Core.Entities;
 public abstract class BaseEntity<TId> : IEntity<TId>
 {
     public TId Id { get; protected init; } = default!;
-    [NotMapped]
-    public Collection<DomainEvent> DomainEvents { get; } = new ();
+
+    [NotMapped] public Collection<DomainEvent> DomainEvents { get; } = new();
+
     public void QueueDomainEvent(DomainEvent @event)
     {
         if (!DomainEvents.Contains(@event))
@@ -20,5 +21,8 @@ public abstract class BaseEntity<TId> : IEntity<TId>
 
 public abstract class BaseEntity : BaseEntity<Guid>
 {
-    protected BaseEntity() => Id = Guid.NewGuid();
+    protected BaseEntity()
+    {
+        Id = Guid.NewGuid();
+    }
 }

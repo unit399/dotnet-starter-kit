@@ -11,6 +11,6 @@
         </PackageReference>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="NewId" Version="4.0.1" />
+        <PackageReference Include="NewId" Version="4.0.1"/>
     </ItemGroup>
 </Project>
