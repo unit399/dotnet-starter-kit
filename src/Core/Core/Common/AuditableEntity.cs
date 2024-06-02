@@ -1,7 +1,7 @@
 using System;
-using ROC.WebApi.Domain.Common.Contracts;
+using ROC.WebApi.Core.Common.Contracts;
 
-namespace ROC.WebApi.Domain.Common;
+namespace ROC.WebApi.Core.Common;
 
 public class AuditableEntity<TId> : BaseEntity<TId>, IAuditable, ISoftDeletable
 {

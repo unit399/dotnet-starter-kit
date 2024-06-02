@@ -4,7 +4,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8D5E19DE-26C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{85876372-8F1E-4B15-99AE-9D92A46B1AAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Core\Domain\Domain.csproj", "{679E0928-89E6-4E37-9997-E94BCD1543DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\Core\Core\Core.csproj", "{679E0928-89E6-4E37-9997-E94BCD1543DF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Core\Infrastructure\Infrastructure.csproj", "{78EC43AB-7E6B-4898-93B2-FC924210BA35}"
 EndProject

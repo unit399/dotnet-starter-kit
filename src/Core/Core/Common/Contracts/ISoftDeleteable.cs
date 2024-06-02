@@ -1,6 +1,6 @@
 using System;
 
-namespace ROC.WebApi.Domain.Common.Contracts;
+namespace ROC.WebApi.Core.Common.Contracts;
 
 public interface ISoftDeletable
 {

@@ -1,10 +1,10 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using ROC.WebApi.Domain.Common.Contracts;
-using ROC.WebApi.Domain.Common.Events;
+using ROC.WebApi.Core.Common.Contracts;
+using ROC.WebApi.Core.Common.Events;
 
-namespace ROC.WebApi.Domain.Common;
+namespace ROC.WebApi.Core.Common;
 
 public abstract class BaseEntity<TId> : IEntity<TId>
 {
