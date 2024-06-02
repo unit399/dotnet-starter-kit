@@ -8,12 +8,6 @@
         <AssemblyName>ROC.WebApi.Server</AssemblyName>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-    </ItemGroup>
-    <ItemGroup>
         <ProjectReference Include="..\Core\Infrastructure\Infrastructure.csproj"/>
         <ProjectReference Include="..\Migrations\PostgreSQL\PostgreSQL.csproj" />
         <ProjectReference Include="..\Services\Catalog\Catalog.Infrastructure\Catalog.Infrastructure.csproj" />
@@ -27,4 +21,18 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
 </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.7.0" />
+      <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" />
+      <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.7.0" />
+      <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.7.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="SonarAnalyzer.CSharp" Version="9.26.0.92422">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
 </Project>
