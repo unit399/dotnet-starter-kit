@@ -1,6 +1,8 @@
 ﻿using Asp.Versioning.Conventions;
 using Carter;
 using FluentValidation;
+using ROC.WebApi.Catalog.Application;
+using ROC.WebApi.Catalog.Infrastructure;
 using ROC.WebApi.Todo;
 
 namespace Server;
@@ -14,6 +16,7 @@ public static class Installer
         //define module assemblies
         var assemblies = new[]
         {
+            typeof(CatalogMetadata).Assembly,
             typeof(TodoModule).Assembly
         };
 
@@ -24,10 +27,15 @@ public static class Installer
         builder.Services.AddMediatR(cfg => { cfg.RegisterServicesFromAssemblies(assemblies); });
 
         //register module services
+        builder.RegisterCatalogServices();
         builder.RegisterTodoServices();
 
         //add carter endpoint modules
-        builder.Services.AddCarter(configurator: config => { config.WithModule<TodoModule.Endpoints>(); });
+        builder.Services.AddCarter(configurator: config =>
+        {
+            config.WithModule<CatalogModule.Endpoints>();
+            config.WithModule<TodoModule.Endpoints>();
+        });
 
         return builder;
     }
@@ -37,6 +45,7 @@ public static class Installer
         ArgumentNullException.ThrowIfNull(app);
 
         //register modules
+        app.UseCatalogModule();
         app.UseTodoModule();
 
         //register api versions
