@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>ROC.WebApi.Catalog.Application</RootNamespace>
+        <AssemblyName>ROC.WebApi.Catalog.Application</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Catalog.Domain\Catalog.Domain.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Catalog.Domain\Catalog.Domain.csproj"/>
+    </ItemGroup>
+
+</Project>
