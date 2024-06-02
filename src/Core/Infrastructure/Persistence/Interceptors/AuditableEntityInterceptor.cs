@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using ROC.WebApi.Core.Entities;
-using ROC.WebApi.Core.Identity.Interfaces;
+using ROC.WebApi.Core.Identity.Users.Interfaces;
 
 namespace ROC.Core.Infrastructure.Persistence.Interceptors;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace ROC.WebApi.Core.Identity.Interfaces;
+namespace ROC.WebApi.Core.Identity.Users.Interfaces;
 
 public interface ICurrentUser
 {

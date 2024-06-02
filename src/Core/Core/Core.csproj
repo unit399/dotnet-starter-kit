@@ -13,6 +13,11 @@
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Ardalis.Specification" Version="8.0.0"/>
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.1"/>
+        <PackageReference Include="MediatR" Version="12.2.0"/>
         <PackageReference Include="NewId" Version="4.0.1"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Tenant\Handlers\"/>
     </ItemGroup>
 </Project>
