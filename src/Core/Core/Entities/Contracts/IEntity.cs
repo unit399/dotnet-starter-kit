@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-using ROC.WebApi.Core.Common.Events;
+using ROC.WebApi.Core.Entities.Events;
 
-namespace ROC.WebApi.Core.Common.Contracts;
+namespace ROC.WebApi.Core.Entities.Contracts;
 
 public interface IEntity
 {

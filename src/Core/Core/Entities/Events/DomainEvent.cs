@@ -1,6 +1,6 @@
 using System;
 
-namespace ROC.WebApi.Core.Common.Events;
+namespace ROC.WebApi.Core.Entities.Events;
 
 public abstract class DomainEvent : IDomainEvent
 {
