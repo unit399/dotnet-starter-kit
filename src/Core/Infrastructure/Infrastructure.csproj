@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>ROC.Core.Infrastructure</RootNamespace>
+        <AssemblyName>ROC.Core.Infrastructure</AssemblyName>
+    </PropertyGroup>
+
+</Project>
