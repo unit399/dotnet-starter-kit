@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -21,6 +22,8 @@ using ROC.WebApi.Core.Identity.Handlers.ToggleUserStatus;
 using ROC.WebApi.Core.Identity.Handlers.UpdateUser;
 using ROC.WebApi.Core.Identity.Users.Entities;
 using ROC.WebApi.Core.Identity.Users.Interfaces;
+using ROC.WebApi.Core.Jobs;
+using ROC.WebApi.Core.Mail;
 using ROC.WebApi.Core.Tenant;
 
 namespace ROC.Core.Infrastructure.Identity.Users.Services;
@@ -31,8 +34,8 @@ internal sealed partial class UserService(
     RoleManager<RocRole> roleManager,
     IdentityDbContext db,
     ICacheService cache,
-    //IJobService jobService,
-    //IMailService mailService,
+    IJobService jobService,
+    IMailService mailService,
     IMultiTenantContextAccessor<RocTenantInfo> multiTenantContextAccessor
 ) : IUserService
 {
@@ -121,15 +124,15 @@ internal sealed partial class UserService(
         await userManager.AddToRoleAsync(user, IdentityConstants.Roles.Basic);
 
         // send confirmation mail
-        /*if (!string.IsNullOrEmpty(user.Email))
+        if (!string.IsNullOrEmpty(user.Email))
         {
-            string emailVerificationUri = await GetEmailVerificationUriAsync(user, origin);
+            var emailVerificationUri = await GetEmailVerificationUriAsync(user, origin);
             var mailRequest = new MailRequest(
                 new Collection<string> { user.Email },
                 "Confirm Registration",
                 emailVerificationUri);
             jobService.Enqueue(() => mailService.SendAsync(mailRequest, CancellationToken.None));
-        }*/
+        }
 
         return new RegisterUserResponse(user.Id);
     }
