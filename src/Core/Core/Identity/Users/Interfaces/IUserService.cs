@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
+using ROC.WebApi.Core.Identity.Handlers.LoginUser;
 using ROC.WebApi.Core.Identity.Handlers.RegisterUser;
 using ROC.WebApi.Core.Identity.Handlers.ToggleUserStatus;
 using ROC.WebApi.Core.Identity.Handlers.UpdateUser;
@@ -22,6 +23,8 @@ public interface IUserService
 
     Task<RegisterUserResponse> RegisterAsync(RegisterUserCommand request, string origin,
         CancellationToken cancellationToken);
+
+    Task<LoginUserResponse> LoginAsync(LoginUserCommand request, string origin, CancellationToken cancellationToken);
 
     Task UpdateAsync(UpdateUserCommand request, string userId);
     Task<string> ConfirmEmailAsync(string userId, string code, string tenant, CancellationToken cancellationToken);

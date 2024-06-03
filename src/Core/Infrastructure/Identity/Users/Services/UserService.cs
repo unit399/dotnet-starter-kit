@@ -17,6 +17,7 @@ using ROC.Core.Infrastructure.Identity.Roles;
 using ROC.Core.Infrastructure.Tenant;
 using ROC.WebApi.Core.Cache;
 using ROC.WebApi.Core.Exceptions;
+using ROC.WebApi.Core.Identity.Handlers.LoginUser;
 using ROC.WebApi.Core.Identity.Handlers.RegisterUser;
 using ROC.WebApi.Core.Identity.Handlers.ToggleUserStatus;
 using ROC.WebApi.Core.Identity.Handlers.UpdateUser;
@@ -137,6 +138,18 @@ internal sealed partial class UserService(
         return new RegisterUserResponse(user.Id);
     }
 
+    public async Task<LoginUserResponse> LoginAsync(LoginUserCommand request, string origin,
+        CancellationToken cancellationToken)
+    {
+        var user = await userManager.FindByEmailAsync(request.Email);
+        if (user is null) throw new BaseException("Invalid email or password");
+        
+        var result = await signInManager.PasswordSignInAsync(user, request.Password, false, false);
+        if (!result.Succeeded) throw new BaseException("Invalid email or password");
+
+        return new LoginUserResponse(user.Id);
+    }
+    
     public async Task ToggleStatusAsync(ToggleUserStatusCommand request, CancellationToken cancellationToken)
     {
         var user = await userManager.Users.Where(u => u.Id == request.UserId).FirstOrDefaultAsync(cancellationToken);

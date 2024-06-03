@@ -13,6 +13,7 @@ public static class RocAction
     public const string Generate = nameof(Generate);
     public const string Clean = nameof(Clean);
     public const string UpgradeSubscription = nameof(UpgradeSubscription);
+    public const string Login = nameof(Login);
 }
 
 public static class RocResource
@@ -30,7 +31,7 @@ public static class RocResource
 
 public static class RocPermissions
 {
-    private static readonly RocPermission[] allPermissions =
+    private static readonly RocPermission[] AllPermissions =
     {
         //tenants
         new("View Tenants", RocAction.View, RocResource.Tenants, IsRoot: true),
@@ -41,7 +42,7 @@ public static class RocPermissions
         //identity
         new("View Users", RocAction.View, RocResource.Users),
         new("Search Users", RocAction.Search, RocResource.Users),
-        new("Create Users", RocAction.Create, RocResource.Users),
+        new("Create Users", RocAction.Create, RocResource.Users, true),
         new("Update Users", RocAction.Update, RocResource.Users),
         new("Delete Users", RocAction.Delete, RocResource.Users),
         new("Export Users", RocAction.Export, RocResource.Users),
@@ -53,6 +54,7 @@ public static class RocPermissions
         new("Delete Roles", RocAction.Delete, RocResource.Roles),
         new("View RoleClaims", RocAction.View, RocResource.RoleClaims),
         new("Update RoleClaims", RocAction.Update, RocResource.RoleClaims),
+        new("Login User", RocAction.Login, RocResource.Users, true),
 
         //products
         new("View Products", RocAction.View, RocResource.Products, true),
@@ -70,16 +72,16 @@ public static class RocPermissions
         new("Delete Todos", RocAction.Delete, RocResource.Todos)
     };
 
-    public static IReadOnlyList<RocPermission> All { get; } = new ReadOnlyCollection<RocPermission>(allPermissions);
+    public static IReadOnlyList<RocPermission> All { get; } = new ReadOnlyCollection<RocPermission>(AllPermissions);
 
     public static IReadOnlyList<RocPermission> Root { get; } =
-        new ReadOnlyCollection<RocPermission>(allPermissions.Where(p => p.IsRoot).ToArray());
+        new ReadOnlyCollection<RocPermission>(AllPermissions.Where(p => p.IsRoot).ToArray());
 
     public static IReadOnlyList<RocPermission> Admin { get; } =
-        new ReadOnlyCollection<RocPermission>(allPermissions.Where(p => !p.IsRoot).ToArray());
+        new ReadOnlyCollection<RocPermission>(AllPermissions.Where(p => !p.IsRoot).ToArray());
 
     public static IReadOnlyList<RocPermission> Basic { get; } =
-        new ReadOnlyCollection<RocPermission>(allPermissions.Where(p => p.IsBasic).ToArray());
+        new ReadOnlyCollection<RocPermission>(AllPermissions.Where(p => p.IsBasic).ToArray());
 }
 
 public record RocPermission(
@@ -94,5 +96,10 @@ public record RocPermission(
     public static string NameFor(string action, string resource)
     {
         return $"Permissions.{resource}.{action}";
+    }
+
+    public string GetDescription()
+    {
+        return Description;
     }
 }
